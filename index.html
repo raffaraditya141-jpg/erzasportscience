@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ErzaSportScience - How To Become A Professional Footballer</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Floating Particles Background -->
+  <div id="particles"></div>
+
+  <!-- Navbar -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <div class="logo">ErzaSport<span>Science</span></div>
+      <ul class="nav-menu">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#materials">Materials</a></li>
+        <li><a href="#schedule">Training</a></li>
+        <li><a href="#positions">Positions</a></li>
+        <li><a href="#videos">Videos</a></li>
+        <li><a href="#quiz">Quiz</a></li>
+        <li><a href="#feedback">Feedback</a></li>
+        <li><a href="#admin" id="adminLink">Admin</a></li>
+        <li><button id="themeToggle"><i class="fas fa-moon"></i></button></li>
+      </ul>
+      <div class="hamburger"><i class="fas fa-bars"></i></div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-content reveal">
+      <h1>How To Become A Professional Footballer</h1>
+      <p>Master the science, discipline, and mentality behind elite football. Train smarter, play better.</p>
+      <div class="hero-buttons">
+        <a href="#materials" class="btn btn-primary">Start Learning</a>
+        <a href="#schedule" class="btn btn-secondary">Explore Training</a>
+      </div>
+    </div>
+    <div class="hero-image reveal">
+      <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800" alt="Football Player">
+    </div>
+  </section>
+
+  <!-- Materials Section -->
+  <section id="materials" class="section">
+    <h2 class="section-title reveal">Football Science Materials</h2>
+    <div class="cards-grid" id="materialsGrid"></div>
+  </section>
+
+  <!-- Training Schedule -->
+  <section id="schedule" class="section dark-bg">
+    <h2 class="section-title reveal">Weekly Professional Training Schedule</h2>
+    <div class="schedule-container" id="scheduleContainer"></div>
+  </section>
+
+  <!-- Positions -->
+  <section id="positions" class="section">
+    <h2 class="section-title reveal">Football Positions</h2>
+    <div class="cards-grid" id="positionsGrid"></div>
+  </section>
+
+  <!-- Videos -->
+  <section id="videos" class="section dark-bg">
+    <h2 class="section-title reveal">Football Video Lessons</h2>
+    <div class="video-grid" id="videoGrid"></div>
+  </section>
+
+  <!-- Quiz -->
+  <section id="quiz" class="section">
+    <h2 class="section-title reveal">Football Knowledge Quiz</h2>
+    <div class="quiz-container" id="quizContainer"></div>
+  </section>
+
+  <!-- Feedback -->
+  <section id="feedback" class="section dark-bg">
+    <h2 class="section-title reveal">Send Feedback</h2>
+    <form id="feedbackForm" class="feedback-form reveal">
+      <input type="text" id="name" placeholder="Your Name" required>
+      <input type="email" id="email" placeholder="Your Email" required>
+      <textarea id="message" placeholder="Your feedback..." required></textarea>
+      <button type="submit" class="btn btn-primary">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Admin Panel -->
+  <section id="admin" class="section">
+    <h2 class="section-title reveal">Admin Dashboard</h2>
+    <div id="loginForm" class="login-form">
+      <input type="password" id="adminPass" placeholder="Enter Admin Password">
+      <button onclick="loginAdmin()" class="btn btn-primary">Login</button>
+    </div>
+    <div id="adminPanel" style="display:none;">
+      <button onclick="logoutAdmin()" class="btn btn-danger">Logout</button>
+      <div class="admin-tabs">
+        <button class="tab-btn active" onclick="showTab('quizTab')">Manage Quiz</button>
+        <button class="tab-btn" onclick="showTab('materialTab')">Manage Materials</button>
+        <button class="tab-btn" onclick="showTab('scheduleTab')">Manage Schedule</button>
+      </div>
+      <div id="quizTab" class="tab-content active"></div>
+      <div id="quizTab" class="tab-content active"></div>
+      <div id="materialTab" class="tab-content"></div>
+      <div id="scheduleTab" class="tab-content"></div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 ErzaSportScience. All Rights Reserved.</p>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-youtube"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+    </div>
+    <p class="quote">"Hard work beats talent when talent doesn't work hard."</p>
+  </footer>
+
+  <script src="script.js"></script> <!-- Modal Materials -->
+<div id="materialModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <h2 id="modalTitle"></h2>
+    <p id="modalDesc"></p>
+  </div>
+</div>
+</body>
+</html>
