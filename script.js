@@ -33,13 +33,13 @@ const positions = [
   {title: "Striker", role: "Score goals, hold up play, press defenders", skills: "Finishing, positioning, strength, movement", example: "Erling Haaland, Kylian Mbappé"}
 ];
 
+// HAPUS video Passing Accuracy
 const videos = [
   {title: "Defensive Play", url: "https://www.youtube.com/embed/W90mt_Y2NtU"},
   {title: "Neutral Play", url: "https://www.youtube.com/embed/rsMJJCnJ3Rc"},
   {title: "Attacking Play", url: "https://www.youtube.com/embed/ZyRL3TnTrco"},
   {title: "Dribbling Technique", url: "https://www.youtube.com/embed/JsLaa1Agr44"},
-  {title: "Finishing Technique", url: "https://www.youtube.com/embed/jy47SRdcomo"},
-  {title: "Passing Accuracy", url: "https://www.youtube.com/embed/JsLaa1Agr44"}
+  {title: "Finishing Technique", url: "https://www.youtube.com/embed/jy47SRdcomo"}
 ];
 
 let quizQuestions = JSON.parse(localStorage.getItem('quizQuestions')) || [
@@ -188,7 +188,7 @@ function restartQuiz(){
   renderQuiz();
 }
 
-// ========== ADMIN FUNCTIONS ==========
+// ========== ADMIN FUNCTIONS - HAPUS TAB MATERIALS & SCHEDULE ==========
 function loginAdmin(){
   const pass = document.getElementById('adminPass').value;
   if(pass === 'admin123'){
@@ -214,43 +214,55 @@ function showTab(tabId){
 }
 
 function renderAdminPanel(){
+  // Cuma sisain Quiz Tab
   document.getElementById('quizTab').innerHTML = `
     <h3>Add/Edit Question</h3>
-    <input id="qText" placeholder="Question">
-    <input id="qOpt0" placeholder="Option 1">
-    <input id="qOpt1" placeholder="Option 2">
-    <input id="qOpt2" placeholder="Option 3">
-    <input id="qAns" type="number" placeholder="Correct Answer Index 0-2">
+    <input id="qText" placeholder="Question" style="width:100%;padding:10px;margin:5px 0;">
+    <input id="qOpt0" placeholder="Option 1" style="width:100%;padding:10px;margin:5px 0;">
+    <input id="qOpt1" placeholder="Option 2" style="width:100%;padding:10px;margin:5px 0;">
+    <input id="qOpt2" placeholder="Option 3" style="width:100%;padding:10px;margin:5px 0;">
+    <input id="qAns" type="number" placeholder="Correct Answer Index 0-2" style="width:100%;padding:10px;margin:5px 0;">
     <button class="btn btn-primary" onclick="addQuestion()">Save Question</button>
-    <div id="questionList"></div>
+    <div id="questionList" style="margin-top:20px;"></div>
   `;
   renderQuestionList();
 }
 
 function addQuestion(){
-  const q = document.getElementById('qText').value;
-  const o = [document.getElementById('qOpt0').value, document.getElementById('qOpt1').value, document.getElementById('qOpt2').value];
+  const q = document.getElementById('qText').value.trim();
+  const o = [document.getElementById('qOpt0').value.trim(), document.getElementById('qOpt1').value.trim(), document.getElementById('qOpt2').value.trim()];
   const a = parseInt(document.getElementById('qAns').value);
-  if(q && o[0] && o[1] && o[2] &&!isNaN(a)){
+  if(q && o[0] && o[1] && o[2] &&!isNaN(a) && a >= 0 && a <= 2){
     quizQuestions.push({q, o, a});
     localStorage.setItem('quizQuestions', JSON.stringify(quizQuestions));
     renderQuestionList();
+    document.getElementById('qText').value = '';
+    document.getElementById('qOpt0').value = '';
+    document.getElementById('qOpt1').value = '';
+    document.getElementById('qOpt2').value = '';
+    document.getElementById('qAns').value = '';
     alert('Question added!');
+  } else {
+    alert('Isi semua field dengan benar!');
   }
 }
 
 function renderQuestionList(){
   document.getElementById('questionList').innerHTML = quizQuestions.map((q, i) => `
     <div style="margin:1rem 0; padding:1rem; background:var(--gray); border-radius:10px;">
-      ${i+1}. ${q.q} <button onclick="deleteQuestion(${i})" class="btn btn-danger">Delete</button>
+      <strong>${i+1}. ${q.q}</strong> <br>
+      Jawaban: ${q.o[q.a]}
+      <button onclick="deleteQuestion(${i})" class="btn btn-danger" style="float:right;">Delete</button>
     </div>
   `).join('');
 }
 
 function deleteQuestion(i){
-  quizQuestions.splice(i, 1);
-  localStorage.setItem('quizQuestions', JSON.stringify(quizQuestions));
-  renderQuestionList();
+  if(confirm('Delete this question?')){
+    quizQuestions.splice(i, 1);
+    localStorage.setItem('quizQuestions', JSON.stringify(quizQuestions));
+    renderQuestionList();
+  }
 }
 
 // ========== UTILS ==========
